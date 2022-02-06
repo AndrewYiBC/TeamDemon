@@ -627,6 +627,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  jumpTimesMax: 2
 --- !u!1 &1420776739
 GameObject:
   m_ObjectHideFlags: 0

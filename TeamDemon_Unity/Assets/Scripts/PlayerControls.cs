@@ -20,6 +20,8 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private Transform groundCheckTransform;
     [SerializeField] private float groundCheckRadius;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private int jumpTimesMax;
+    private int jumpTimes = 0;
 
     void Start()
     {
@@ -32,7 +34,7 @@ public class PlayerControls : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheckTransform.position, groundCheckRadius, groundLayer);
         if (Input.GetButtonDown("Jump"))
         {
-            if (isGrounded)
+            if (jumpTimes > 0)
             {
                 isJumping = true;
             }
@@ -42,9 +44,14 @@ public class PlayerControls : MonoBehaviour
     void FixedUpdate()
     {
         rb.velocity = new Vector2(moveInputHorizontal * moveSpeed, rb.velocity.y);
+        if (isGrounded)
+        {
+            jumpTimes = jumpTimesMax;
+        }
         if (isJumping)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            jumpTimes--;
             isJumping = false;
         }
     }
