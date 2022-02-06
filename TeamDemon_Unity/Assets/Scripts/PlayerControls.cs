@@ -46,13 +46,23 @@ public class PlayerControls : MonoBehaviour
         rb.velocity = new Vector2(moveInputHorizontal * moveSpeed, rb.velocity.y);
         if (isGrounded)
         {
-            jumpTimes = jumpTimesMax;
+            ResetJumpTimes();
         }
         if (isJumping)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            jumpTimes--;
-            isJumping = false;
+            Jump();
         }
+    }
+
+    private void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        jumpTimes--;
+        isJumping = false;
+    }
+
+    private void ResetJumpTimes()
+    {
+        jumpTimes = jumpTimesMax;
     }
 }
