@@ -8,6 +8,7 @@ public class PlayerControls : MonoBehaviour
 {
     // Components
     private Rigidbody2D rb;
+    private Animator anim;
 
     // Moving
     [SerializeField] private float moveSpeed;
@@ -26,11 +27,13 @@ public class PlayerControls : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
         moveInputHorizontal = Input.GetAxisRaw("Horizontal");
+        anim.SetFloat("Speed", Mathf.Abs(moveInputHorizontal));
         isGrounded = Physics2D.OverlapCircle(groundCheckTransform.position, groundCheckRadius, groundLayer);
         if (Input.GetButtonDown("Jump"))
         {
