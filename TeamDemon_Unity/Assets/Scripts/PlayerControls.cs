@@ -13,6 +13,7 @@ public class PlayerControls : MonoBehaviour
     // Moving
     [SerializeField] private float moveSpeed;
     private float moveInputHorizontal = 0f;
+    private bool isFacingLeft = true;
 
     // Jumping
     [SerializeField] private float jumpForce;
@@ -46,7 +47,17 @@ public class PlayerControls : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Moving
         rb.velocity = new Vector2(moveInputHorizontal * moveSpeed, rb.velocity.y);
+        if (isFacingLeft && moveInputHorizontal > 0)
+        {
+            Flip();
+        } else if (!isFacingLeft && moveInputHorizontal < 0)
+        {
+            Flip();
+        }
+
+        // Jumping
         if (isGrounded)
         {
             ResetJumpTimes();
@@ -67,5 +78,13 @@ public class PlayerControls : MonoBehaviour
     private void ResetJumpTimes()
     {
         jumpTimes = jumpTimesMax;
+    }
+
+    private void Flip()
+    {
+        isFacingLeft = !isFacingLeft;
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1;
+        transform.localScale = localScale;
     }
 }
