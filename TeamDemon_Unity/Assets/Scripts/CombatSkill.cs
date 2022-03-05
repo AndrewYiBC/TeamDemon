@@ -5,6 +5,7 @@ using UnityEngine;
 public class CombatSkill : MonoBehaviour
 {
     [SerializeField] private Transform combatPoint;
+    [SerializeField] private GameObject skillPrefab;
 
     void Update()
     {
@@ -16,6 +17,6 @@ public class CombatSkill : MonoBehaviour
 
     private void UseSkill()
     {
-
+        Instantiate(skillPrefab, combatPoint.position, combatPoint.rotation);
     }
 }
