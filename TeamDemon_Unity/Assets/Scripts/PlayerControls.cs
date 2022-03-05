@@ -83,8 +83,6 @@ public class PlayerControls : MonoBehaviour
     private void Flip()
     {
         isFacingLeft = !isFacingLeft;
-        Vector3 localScale = transform.localScale;
-        localScale.x *= -1;
-        transform.localScale = localScale;
+        transform.Rotate(0f, 180f, 0f);
     }
 }
