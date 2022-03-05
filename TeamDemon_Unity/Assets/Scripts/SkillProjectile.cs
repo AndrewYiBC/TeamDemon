@@ -17,6 +17,10 @@ public class SkillProjectile : MonoBehaviour
     {
         if (collision.gameObject.tag != "Player")
         {
+            if (collision.gameObject.tag == "Enemy")
+            {
+                Destroy(collision.gameObject);
+            }
             Destroy(gameObject);
         }
     }
