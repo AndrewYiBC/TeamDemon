@@ -6,6 +6,7 @@ public class SkillProjectile : MonoBehaviour
 {
     private Rigidbody2D rb;
     [SerializeField] private float flySpeed = 15f;
+    [SerializeField] private float skillDamage = 20f;
 
     void Start()
     {
@@ -17,9 +18,10 @@ public class SkillProjectile : MonoBehaviour
     {
         if (collision.gameObject.tag != "Player")
         {
-            if (collision.gameObject.tag == "Enemy")
+            EnemyGeneral enemy = collision.GetComponent<EnemyGeneral>();
+            if (enemy != null)
             {
-                Destroy(collision.gameObject);
+                enemy.DecreaseHP(skillDamage);
             }
             Destroy(gameObject);
         }
