@@ -10,12 +10,12 @@ public class PlayerControls : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
-    // Moving
+    // Movement
     [SerializeField] private float moveSpeed;
     private float moveInputHorizontal = 0f;
     private bool isFacingLeft = true;
 
-    // Jumping
+    // Jump
     [SerializeField] private float jumpForce;
     private bool isJumping = false;
     private bool isGrounded = false;
@@ -25,6 +25,10 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private int jumpTimesMax;
     private int jumpTimes = 0;
 
+    // Combat
+    [SerializeField] private Transform skillStartingTransform;
+    [SerializeField] private GameObject skillPrefab;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,8 +37,11 @@ public class PlayerControls : MonoBehaviour
 
     void Update()
     {
+        // Movement
         moveInputHorizontal = Input.GetAxisRaw("Horizontal");
         anim.SetFloat("Speed", Mathf.Abs(moveInputHorizontal));
+        
+        // Jump
         isGrounded = Physics2D.OverlapCircle(groundCheckTransform.position, groundCheckRadius, groundLayer);
         if (Input.GetButtonDown("Jump"))
         {
@@ -42,6 +49,12 @@ public class PlayerControls : MonoBehaviour
             {
                 isJumping = true;
             }
+        }
+
+        // Combat
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            UseSkill();
         }
     }
 
@@ -68,6 +81,12 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
+    private void Flip()
+    {
+        isFacingLeft = !isFacingLeft;
+        transform.Rotate(0f, 180f, 0f);
+    }
+
     private void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -80,9 +99,8 @@ public class PlayerControls : MonoBehaviour
         jumpTimes = jumpTimesMax;
     }
 
-    private void Flip()
+    private void UseSkill()
     {
-        isFacingLeft = !isFacingLeft;
-        transform.Rotate(0f, 180f, 0f);
+        Instantiate(skillPrefab, skillStartingTransform.position, skillStartingTransform.rotation);
     }
 }

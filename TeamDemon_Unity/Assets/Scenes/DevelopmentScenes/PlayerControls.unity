@@ -3765,17 +3765,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 116323428592895070, guid: 5fe6f2c2e62e35941ad8446fea9867cf, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 3081444935610374281, guid: 5fe6f2c2e62e35941ad8446fea9867cf, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 3081444935610374282, guid: 5fe6f2c2e62e35941ad8446fea9867cf, type: 3}
-      propertyPath: m_GravityScale
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3081444935610374283, guid: 5fe6f2c2e62e35941ad8446fea9867cf, type: 3}
       propertyPath: m_RootOrder
@@ -3820,14 +3812,6 @@ PrefabInstance:
     - target: {fileID: 3081444935610374283, guid: 5fe6f2c2e62e35941ad8446fea9867cf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3081444935610374287, guid: 5fe6f2c2e62e35941ad8446fea9867cf, type: 3}
-      propertyPath: jumpForce
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 3081444935610374287, guid: 5fe6f2c2e62e35941ad8446fea9867cf, type: 3}
-      propertyPath: moveSpeed
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fe6f2c2e62e35941ad8446fea9867cf, type: 3}
