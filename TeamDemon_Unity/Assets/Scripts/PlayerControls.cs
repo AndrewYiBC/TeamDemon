@@ -26,6 +26,10 @@ public class PlayerControls : MonoBehaviour
     private int jumpTimes = 0;
 
     // Combat
+    // Transformation
+    private bool isInDemonForm = false;
+    [SerializeField] private GameObject demonFormIndicatorTemp;
+    // Skill
     [SerializeField] private Transform skillStartingTransform;
     [SerializeField] private GameObject skillPrefab;
 
@@ -52,6 +56,12 @@ public class PlayerControls : MonoBehaviour
         }
 
         // Combat
+        // Transformation
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            DemonFormTransform();
+        }
+        // Skill
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             UseSkill();
@@ -97,6 +107,12 @@ public class PlayerControls : MonoBehaviour
     private void ResetJumpTimes()
     {
         jumpTimes = jumpTimesMax;
+    }
+
+    private void DemonFormTransform()
+    {
+        isInDemonForm = !isInDemonForm;
+        demonFormIndicatorTemp.SetActive(isInDemonForm);
     }
 
     private void UseSkill()
