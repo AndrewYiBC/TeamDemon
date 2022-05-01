@@ -32,6 +32,8 @@ public class PlayerControls : MonoBehaviour
     // Skill
     [SerializeField] private Transform skillStartingTransform;
     [SerializeField] private GameObject skillPrefab;
+    [SerializeField] private float skillCooldown;
+    private bool isInSkillCooldown = false;
 
     void Start()
     {
@@ -62,7 +64,7 @@ public class PlayerControls : MonoBehaviour
             DemonFormTransform();
         }
         // Skill
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKeyDown(KeyCode.Mouse1) && isInDemonForm && !isInSkillCooldown)
         {
             UseSkill();
         }
@@ -70,7 +72,7 @@ public class PlayerControls : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Moving
+        // Movement
         rb.velocity = new Vector2(moveInputHorizontal * moveSpeed, rb.velocity.y);
         if (isFacingLeft && moveInputHorizontal > 0)
         {
@@ -80,7 +82,7 @@ public class PlayerControls : MonoBehaviour
             Flip();
         }
 
-        // Jumping
+        // Jump
         if (isGrounded)
         {
             ResetJumpTimes();
@@ -91,12 +93,14 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
+    // Movement
     private void Flip()
     {
         isFacingLeft = !isFacingLeft;
         transform.Rotate(0f, 180f, 0f);
     }
 
+    // Jump
     private void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -109,14 +113,25 @@ public class PlayerControls : MonoBehaviour
         jumpTimes = jumpTimesMax;
     }
 
+    // Combat
+    // Transformation
     private void DemonFormTransform()
     {
         isInDemonForm = !isInDemonForm;
         demonFormIndicatorTemp.SetActive(isInDemonForm);
     }
 
+    // Skill
     private void UseSkill()
     {
         Instantiate(skillPrefab, skillStartingTransform.position, skillStartingTransform.rotation);
+        isInSkillCooldown = true;
+        StartCoroutine(SkillCooldownCoroutine());
+    }
+
+    private IEnumerator SkillCooldownCoroutine()
+    {
+        yield return new WaitForSeconds(skillCooldown);
+        isInSkillCooldown = false;
     }
 }

@@ -202,8 +202,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   jumpTimesMax: 2
+  demonFormIndicatorTemp: {fileID: 0}
   skillStartingTransform: {fileID: 116323428592895070}
   skillPrefab: {fileID: 2334493074816148013, guid: ed87f87c0a237b4418da932c24fc82ea, type: 3}
+  skillCooldown: 0.5
 --- !u!95 &7741182574604934072
 Animator:
   serializedVersion: 3
