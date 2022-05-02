@@ -30,6 +30,13 @@ public class PlayerControls : MonoBehaviour
     private bool isDemonForm = false;
     [SerializeField] private GameObject demonFormIndicatorTemp;
     // Melee Attack
+    [SerializeField] private float attackDamage_Normal;
+    [SerializeField] private float attackDamage_DemonForm;
+    [SerializeField] private Transform attackCenterTransform_Normal;
+    [SerializeField] private float attackRadius_Normal;
+    [SerializeField] private Transform attackCenterTransform_DemonForm;
+    [SerializeField] private float attackRadius_DemonForm;
+    [SerializeField] private LayerMask attackLayers;
     [SerializeField] private GameObject attackEffectTemp_Normal;
     [SerializeField] private GameObject attackEffectTemp_DemonForm;
     [SerializeField] private float attackEffectDuration;
@@ -135,16 +142,34 @@ public class PlayerControls : MonoBehaviour
     // Melee Attack
     private void MeleeAttack()
     {
+        Transform attackCenterTransform;
+        float attackRadius;
+        float attackDamage;
         if (isDemonForm)
         {
+            attackCenterTransform = attackCenterTransform_DemonForm;
+            attackRadius = attackRadius_DemonForm;
+            attackDamage = attackDamage_DemonForm;
             attackEffectTemp_DemonForm.SetActive(true);
             isInAttackCooldown = true;
             StartCoroutine(AttackEffectCoroutine(attackEffectTemp_DemonForm));
         } else
         {
+            attackCenterTransform = attackCenterTransform_Normal;
+            attackRadius = attackRadius_Normal;
+            attackDamage = attackDamage_Normal;
             attackEffectTemp_Normal.SetActive(true);
             isInAttackCooldown = true;
             StartCoroutine(AttackEffectCoroutine(attackEffectTemp_Normal));
+        }
+        Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackCenterTransform.position, attackRadius, attackLayers);
+        foreach(Collider2D enemy in enemiesHit)
+        {
+            EnemyGeneral enemy_script = enemy.GetComponent<EnemyGeneral>();
+            if (enemy_script != null)
+            {
+                enemy_script.DecreaseHP(attackDamage);
+            }
         }
         StartCoroutine(AttackCooldownCoroutine());
     }
@@ -173,5 +198,12 @@ public class PlayerControls : MonoBehaviour
     {
         yield return new WaitForSeconds(skillCooldown);
         isInSkillCooldown = false;
+    }
+
+    // Miscellaneous
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(attackCenterTransform_Normal.position, attackRadius_Normal);
+        Gizmos.DrawWireSphere(attackCenterTransform_DemonForm.position, attackRadius_DemonForm);
     }
 }
