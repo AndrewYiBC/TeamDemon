@@ -27,8 +27,14 @@ public class PlayerControls : MonoBehaviour
 
     // Combat
     // Transformation
-    private bool isInDemonForm = false;
+    private bool isDemonForm = false;
     [SerializeField] private GameObject demonFormIndicatorTemp;
+    // Melee Attack
+    [SerializeField] private GameObject attackEffectTemp_Normal;
+    [SerializeField] private GameObject attackEffectTemp_DemonForm;
+    [SerializeField] private float attackEffectDuration;
+    [SerializeField] private float attackCooldown;
+    private bool isInAttackCooldown = false;
     // Skill
     [SerializeField] private Transform skillStartingTransform;
     [SerializeField] private GameObject skillPrefab;
@@ -63,8 +69,13 @@ public class PlayerControls : MonoBehaviour
         {
             DemonFormTransform();
         }
+        // Melee Attack
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !isInAttackCooldown)
+        {
+            MeleeAttack();
+        }
         // Skill
-        if (Input.GetKeyDown(KeyCode.Mouse1) && isInDemonForm && !isInSkillCooldown)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && isDemonForm && !isInSkillCooldown)
         {
             UseSkill();
         }
@@ -117,8 +128,37 @@ public class PlayerControls : MonoBehaviour
     // Transformation
     private void DemonFormTransform()
     {
-        isInDemonForm = !isInDemonForm;
-        demonFormIndicatorTemp.SetActive(isInDemonForm);
+        isDemonForm = !isDemonForm;
+        demonFormIndicatorTemp.SetActive(isDemonForm);
+    }
+
+    // Melee Attack
+    private void MeleeAttack()
+    {
+        if (isDemonForm)
+        {
+            attackEffectTemp_DemonForm.SetActive(true);
+            isInAttackCooldown = true;
+            StartCoroutine(AttackEffectCoroutine(attackEffectTemp_DemonForm));
+        } else
+        {
+            attackEffectTemp_Normal.SetActive(true);
+            isInAttackCooldown = true;
+            StartCoroutine(AttackEffectCoroutine(attackEffectTemp_Normal));
+        }
+        StartCoroutine(AttackCooldownCoroutine());
+    }
+
+    private IEnumerator AttackEffectCoroutine(GameObject effect)
+    {
+        yield return new WaitForSeconds(attackEffectDuration);
+        effect.SetActive(false);
+    }
+
+    private IEnumerator AttackCooldownCoroutine()
+    {
+        yield return new WaitForSeconds(attackCooldown);
+        isInAttackCooldown = false;
     }
 
     // Skill
