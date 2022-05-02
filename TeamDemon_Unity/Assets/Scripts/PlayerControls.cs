@@ -10,12 +10,12 @@ public class PlayerControls : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
-    // Moving
+    // Movement
     [SerializeField] private float moveSpeed;
     private float moveInputHorizontal = 0f;
     private bool isFacingLeft = true;
 
-    // Jumping
+    // Jump
     [SerializeField] private float jumpForce;
     private bool isJumping = false;
     private bool isGrounded = false;
@@ -25,6 +25,29 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private int jumpTimesMax;
     private int jumpTimes = 0;
 
+    // Combat
+    // Transformation
+    private bool isDemonForm = false;
+    [SerializeField] private GameObject demonFormIndicatorTemp;
+    // Melee Attack
+    [SerializeField] private float attackDamage_Normal;
+    [SerializeField] private float attackDamage_DemonForm;
+    [SerializeField] private Transform attackCenterTransform_Normal;
+    [SerializeField] private float attackRadius_Normal;
+    [SerializeField] private Transform attackCenterTransform_DemonForm;
+    [SerializeField] private float attackRadius_DemonForm;
+    [SerializeField] private LayerMask attackLayers;
+    [SerializeField] private GameObject attackEffectTemp_Normal;
+    [SerializeField] private GameObject attackEffectTemp_DemonForm;
+    [SerializeField] private float attackEffectDuration;
+    [SerializeField] private float attackCooldown;
+    private bool isInAttackCooldown = false;
+    // Skill
+    [SerializeField] private Transform skillStartingTransform;
+    [SerializeField] private GameObject skillPrefab;
+    [SerializeField] private float skillCooldown;
+    private bool isInSkillCooldown = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,8 +56,11 @@ public class PlayerControls : MonoBehaviour
 
     void Update()
     {
+        // Movement
         moveInputHorizontal = Input.GetAxisRaw("Horizontal");
         anim.SetFloat("Speed", Mathf.Abs(moveInputHorizontal));
+        
+        // Jump
         isGrounded = Physics2D.OverlapCircle(groundCheckTransform.position, groundCheckRadius, groundLayer);
         if (Input.GetButtonDown("Jump"))
         {
@@ -43,11 +69,28 @@ public class PlayerControls : MonoBehaviour
                 isJumping = true;
             }
         }
+
+        // Combat
+        // Transformation
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            DemonFormTransform();
+        }
+        // Melee Attack
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !isInAttackCooldown)
+        {
+            MeleeAttack();
+        }
+        // Skill
+        if (Input.GetKeyDown(KeyCode.Mouse1) && isDemonForm && !isInSkillCooldown)
+        {
+            UseSkill();
+        }
     }
 
     void FixedUpdate()
     {
-        // Moving
+        // Movement
         rb.velocity = new Vector2(moveInputHorizontal * moveSpeed, rb.velocity.y);
         if (isFacingLeft && moveInputHorizontal > 0)
         {
@@ -57,7 +100,7 @@ public class PlayerControls : MonoBehaviour
             Flip();
         }
 
-        // Jumping
+        // Jump
         if (isGrounded)
         {
             ResetJumpTimes();
@@ -68,6 +111,14 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
+    // Movement
+    private void Flip()
+    {
+        isFacingLeft = !isFacingLeft;
+        transform.Rotate(0f, 180f, 0f);
+    }
+
+    // Jump
     private void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -80,9 +131,79 @@ public class PlayerControls : MonoBehaviour
         jumpTimes = jumpTimesMax;
     }
 
-    private void Flip()
+    // Combat
+    // Transformation
+    private void DemonFormTransform()
     {
-        isFacingLeft = !isFacingLeft;
-        transform.Rotate(0f, 180f, 0f);
+        isDemonForm = !isDemonForm;
+        demonFormIndicatorTemp.SetActive(isDemonForm);
+    }
+
+    // Melee Attack
+    private void MeleeAttack()
+    {
+        Transform attackCenterTransform;
+        float attackRadius;
+        float attackDamage;
+        if (isDemonForm)
+        {
+            attackCenterTransform = attackCenterTransform_DemonForm;
+            attackRadius = attackRadius_DemonForm;
+            attackDamage = attackDamage_DemonForm;
+            attackEffectTemp_DemonForm.SetActive(true);
+            isInAttackCooldown = true;
+            StartCoroutine(AttackEffectCoroutine(attackEffectTemp_DemonForm));
+        } else
+        {
+            attackCenterTransform = attackCenterTransform_Normal;
+            attackRadius = attackRadius_Normal;
+            attackDamage = attackDamage_Normal;
+            attackEffectTemp_Normal.SetActive(true);
+            isInAttackCooldown = true;
+            StartCoroutine(AttackEffectCoroutine(attackEffectTemp_Normal));
+        }
+        Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackCenterTransform.position, attackRadius, attackLayers);
+        foreach(Collider2D enemy in enemiesHit)
+        {
+            EnemyGeneral enemy_script = enemy.GetComponent<EnemyGeneral>();
+            if (enemy_script != null)
+            {
+                enemy_script.DecreaseHP(attackDamage);
+            }
+        }
+        StartCoroutine(AttackCooldownCoroutine());
+    }
+
+    private IEnumerator AttackEffectCoroutine(GameObject effect)
+    {
+        yield return new WaitForSeconds(attackEffectDuration);
+        effect.SetActive(false);
+    }
+
+    private IEnumerator AttackCooldownCoroutine()
+    {
+        yield return new WaitForSeconds(attackCooldown);
+        isInAttackCooldown = false;
+    }
+
+    // Skill
+    private void UseSkill()
+    {
+        Instantiate(skillPrefab, skillStartingTransform.position, skillStartingTransform.rotation);
+        isInSkillCooldown = true;
+        StartCoroutine(SkillCooldownCoroutine());
+    }
+
+    private IEnumerator SkillCooldownCoroutine()
+    {
+        yield return new WaitForSeconds(skillCooldown);
+        isInSkillCooldown = false;
+    }
+
+    // Miscellaneous
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(attackCenterTransform_Normal.position, attackRadius_Normal);
+        Gizmos.DrawWireSphere(attackCenterTransform_DemonForm.position, attackRadius_DemonForm);
     }
 }
