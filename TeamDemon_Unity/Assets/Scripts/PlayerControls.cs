@@ -28,7 +28,7 @@ public class PlayerControls : MonoBehaviour
     // Combat
     // Transformation
     private bool isDemonForm = false;
-    [SerializeField] private GameObject demonFormIndicatorTemp;
+    [SerializeField] private GameObject demonFormAura;
     // Melee Attack
     [SerializeField] private float attackDamage_Normal;
     [SerializeField] private float attackDamage_DemonForm;
@@ -136,7 +136,7 @@ public class PlayerControls : MonoBehaviour
     private void DemonFormTransform()
     {
         isDemonForm = !isDemonForm;
-        demonFormIndicatorTemp.SetActive(isDemonForm);
+        demonFormAura.SetActive(isDemonForm);
     }
 
     // Melee Attack

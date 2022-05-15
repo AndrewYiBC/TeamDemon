@@ -3982,6 +3982,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 896629701, guid: 5fe6f2c2e62e35941ad8446fea9867cf, type: 3}
+      propertyPath: m_Name
+      value: AttackEffectTemp_DemonForm
+      objectReference: {fileID: 0}
     - target: {fileID: 3081444935610374280, guid: 5fe6f2c2e62e35941ad8446fea9867cf, type: 3}
       propertyPath: m_SortingOrder
       value: 100
@@ -4034,6 +4038,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3081444935610374287, guid: 5fe6f2c2e62e35941ad8446fea9867cf, type: 3}
+      propertyPath: demonFormAura
+      value: 
+      objectReference: {fileID: 719541571}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fe6f2c2e62e35941ad8446fea9867cf, type: 3}
 --- !u!4 &3081444936678596578 stripped
