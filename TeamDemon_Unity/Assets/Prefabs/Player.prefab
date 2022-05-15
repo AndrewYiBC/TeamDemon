@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 14795030}
   - component: {fileID: 14795029}
+  - component: {fileID: 719541574}
   m_Layer: 0
-  m_Name: DemonFormIndicatorTemp
+  m_Name: DemonFormAura
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 14795028}
-  m_LocalRotation: {x: -0, y: -0, z: 0.38268343, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 1.75, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.24, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 3081444935610374283}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &14795029
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -68,10 +69,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -260297443
-  m_SortingLayer: 2
-  m_SortingOrder: 2000
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_SortingLayerID: 115788921
+  m_SortingLayer: 1
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 370693cd6d2fa6048b5e3a491c201e7b, type: 3}
   m_Color: {r: 0.6156863, g: 0, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -82,6 +83,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &719541574
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14795028}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: abac08dbb343edf4fb32e204e3350cb2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &20045708
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,7 +173,7 @@ GameObject:
   - component: {fileID: 896629703}
   - component: {fileID: 896629702}
   m_Layer: 0
-  m_Name: AttackTempEffectTemp_DemonForm
+  m_Name: AttackEffectTemp_DemonForm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -418,7 +438,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 115788921
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_Sprite: {fileID: 21300000, guid: 25d394143675b2a47bf519710f6ea6eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -513,7 +533,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   jumpTimesMax: 2
-  demonFormIndicatorTemp: {fileID: 14795028}
+  demonFormAura: {fileID: 14795028}
   attackDamage_Normal: 25
   attackDamage_DemonForm: 50
   attackCenterTransform_Normal: {fileID: 20045709}
