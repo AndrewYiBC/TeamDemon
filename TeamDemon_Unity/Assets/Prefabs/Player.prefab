@@ -550,6 +550,8 @@ MonoBehaviour:
   skillStartingTransform: {fileID: 116323428592895070}
   skillPrefab: {fileID: 2334493074816148013, guid: ed87f87c0a237b4418da932c24fc82ea, type: 3}
   skillCooldown: 0.5
+  attackRecovery: 0.12
+  skillRecovery: 0.12
 --- !u!95 &7741182574604934072
 Animator:
   serializedVersion: 3
