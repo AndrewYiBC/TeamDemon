@@ -48,6 +48,11 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private float skillCooldown;
     private bool isInSkillCooldown = false;
 
+    // Recovery
+    [SerializeField] private float attackRecovery;
+    [SerializeField] private float skillRecovery;
+    private bool isInRecovery = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -57,12 +62,18 @@ public class PlayerControls : MonoBehaviour
     void Update()
     {
         // Movement
-        moveInputHorizontal = Input.GetAxisRaw("Horizontal");
-        anim.SetFloat("Speed", Mathf.Abs(moveInputHorizontal));
+        if (!isInRecovery)
+        {
+            moveInputHorizontal = Input.GetAxisRaw("Horizontal");
+            anim.SetFloat("Speed", Mathf.Abs(moveInputHorizontal));
+        } else
+        {
+            anim.SetFloat("Speed", Mathf.Abs(moveInputHorizontal));
+        }
         
         // Jump
         isGrounded = Physics2D.OverlapCircle(groundCheckTransform.position, groundCheckRadius, groundLayer);
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && !isInRecovery)
         {
             if (jumpTimes > 0)
             {
@@ -72,17 +83,17 @@ public class PlayerControls : MonoBehaviour
 
         // Combat
         // Transformation
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.T) && !isInRecovery)
         {
             DemonFormTransform();
         }
         // Melee Attack
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !isInAttackCooldown)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !isInAttackCooldown && !isInRecovery)
         {
             MeleeAttack();
         }
         // Skill
-        if (Input.GetKeyDown(KeyCode.Mouse1) && isDemonForm && !isInSkillCooldown)
+        if (Input.GetKeyDown(KeyCode.Mouse1) && isDemonForm && !isInSkillCooldown && !isInRecovery)
         {
             UseSkill();
         }
@@ -103,10 +114,13 @@ public class PlayerControls : MonoBehaviour
         // Jump
         if (isGrounded)
         {
+            anim.SetBool("IsJumpInAir", false);
             ResetJumpTimes();
         }
         if (isJumping)
         {
+            anim.SetBool("IsJumpInAir", false);
+            anim.SetBool("IsJumpInAir", true);
             Jump();
         }
     }
@@ -151,7 +165,6 @@ public class PlayerControls : MonoBehaviour
             attackRadius = attackRadius_DemonForm;
             attackDamage = attackDamage_DemonForm;
             attackEffectTemp_DemonForm.SetActive(true);
-            isInAttackCooldown = true;
             StartCoroutine(AttackEffectCoroutine(attackEffectTemp_DemonForm));
         } else
         {
@@ -159,7 +172,6 @@ public class PlayerControls : MonoBehaviour
             attackRadius = attackRadius_Normal;
             attackDamage = attackDamage_Normal;
             attackEffectTemp_Normal.SetActive(true);
-            isInAttackCooldown = true;
             StartCoroutine(AttackEffectCoroutine(attackEffectTemp_Normal));
         }
         Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackCenterTransform.position, attackRadius, attackLayers);
@@ -171,7 +183,10 @@ public class PlayerControls : MonoBehaviour
                 enemy_script.DecreaseHP(attackDamage);
             }
         }
+        isInAttackCooldown = true;
         StartCoroutine(AttackCooldownCoroutine());
+        isInRecovery = true;
+        StartCoroutine(RecoveryCoroutine(attackRecovery));
     }
 
     private IEnumerator AttackEffectCoroutine(GameObject effect)
@@ -192,12 +207,20 @@ public class PlayerControls : MonoBehaviour
         Instantiate(skillPrefab, skillStartingTransform.position, skillStartingTransform.rotation);
         isInSkillCooldown = true;
         StartCoroutine(SkillCooldownCoroutine());
+        isInRecovery = true;
+        StartCoroutine(RecoveryCoroutine(skillRecovery));
     }
 
     private IEnumerator SkillCooldownCoroutine()
     {
         yield return new WaitForSeconds(skillCooldown);
         isInSkillCooldown = false;
+    }
+
+    private IEnumerator RecoveryCoroutine(float recoveryDuration)
+    {
+        yield return new WaitForSeconds(recoveryDuration);
+        isInRecovery = false;
     }
 
     // Miscellaneous
