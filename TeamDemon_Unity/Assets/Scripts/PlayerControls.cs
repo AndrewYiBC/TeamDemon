@@ -103,10 +103,13 @@ public class PlayerControls : MonoBehaviour
         // Jump
         if (isGrounded)
         {
+            anim.SetBool("IsJumpInAir", false);
             ResetJumpTimes();
         }
         if (isJumping)
         {
+            anim.SetBool("IsJumpInAir", false);
+            anim.SetBool("IsJumpInAir", true);
             Jump();
         }
     }
