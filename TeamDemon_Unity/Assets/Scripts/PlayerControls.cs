@@ -183,9 +183,7 @@ public class PlayerControls : MonoBehaviour
                 enemy_script.DecreaseHP(attackDamage);
             }
         }
-        isInAttackCooldown = true;
         StartCoroutine(AttackCooldownCoroutine());
-        isInRecovery = true;
         StartCoroutine(RecoveryCoroutine(attackRecovery));
     }
 
@@ -197,6 +195,7 @@ public class PlayerControls : MonoBehaviour
 
     private IEnumerator AttackCooldownCoroutine()
     {
+        isInAttackCooldown = true;
         yield return new WaitForSeconds(attackCooldown);
         isInAttackCooldown = false;
     }
@@ -205,20 +204,20 @@ public class PlayerControls : MonoBehaviour
     private void UseSkill()
     {
         Instantiate(skillPrefab, skillStartingTransform.position, skillStartingTransform.rotation);
-        isInSkillCooldown = true;
         StartCoroutine(SkillCooldownCoroutine());
-        isInRecovery = true;
         StartCoroutine(RecoveryCoroutine(skillRecovery));
     }
 
     private IEnumerator SkillCooldownCoroutine()
     {
+        isInSkillCooldown = true;
         yield return new WaitForSeconds(skillCooldown);
         isInSkillCooldown = false;
     }
 
     private IEnumerator RecoveryCoroutine(float recoveryDuration)
     {
+        isInRecovery = true;
         yield return new WaitForSeconds(recoveryDuration);
         isInRecovery = false;
     }
