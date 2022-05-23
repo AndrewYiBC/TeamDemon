@@ -9,7 +9,7 @@ public class PatrolingEnemy_Patrol : StateMachineBehaviour
     Rigidbody2D rb;
     public float speed = 2.5f;
     public float attackRange = 3f;
-    public float patrolRange = 10f;
+    public float patrolRange = 20f;
     float patrolTimeTracker = 0f;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -28,6 +28,7 @@ public class PatrolingEnemy_Patrol : StateMachineBehaviour
 
         //move to attack stuff
         if (Vector2.Distance(player.position, rb.position) <= attackRange)
+        if (Vector2.Distance(player.position, rb.position) <= attackRange)
         {
             animator.SetTrigger("Attack");
         }
@@ -41,19 +42,19 @@ public class PatrolingEnemy_Patrol : StateMachineBehaviour
         //move to patrol stuff
         //if out of range for too long
         //  go to patrol
-        //if (Vector2.Distance(player.position, rb.position) >= patrolRange)
-        //{
-        //    patrolTimeTracker += Time.fixedDeltaTime;
-        //}
-        //else 
-        //{
-        //    patrolTimeTracker = 0;
-        //}
-        //
-        //if (patrolTimeTracker >= animator.GetFloat("PatrolTime"))
-        //{
-        //    animator.SetTrigger("Patrol");
-        //}
+        if (Vector2.Distance(player.position, rb.position) >= patrolRange)
+        {
+            patrolTimeTracker += Time.fixedDeltaTime;
+        }
+        else 
+        {
+            patrolTimeTracker = 0;
+        }
+        
+        if (patrolTimeTracker >= animator.GetFloat("PatrolTime"))
+        {
+            animator.SetTrigger("Patrol");
+        }
 
         if (Vector2.Distance(player.position, rb.position) < animator.GetFloat("IdleDist"))
         {
