@@ -8,8 +8,11 @@ public class AudioManager : MonoBehaviour
 {
 
     [SerializeField] AudioMixer mixer;
-    [SerializeField] Slider slider;
+    //[SerializeField] Slider slider;
+    [SerializeField] GameObject player;
 
+
+    private PlayerControls playerController;
     private float corruption;
 
     /*
@@ -20,7 +23,9 @@ public class AudioManager : MonoBehaviour
 
     private void Awake() {
         corruption = 0.001f;
-        slider.onValueChanged.AddListener(GetValue);
+        //slider.onValueChanged.AddListener(GetValue);
+
+        playerController = player.GetComponent<PlayerControls>();
     }
 
     private void Start() {
@@ -28,7 +33,18 @@ public class AudioManager : MonoBehaviour
     }
 
     private void Update() {
+        GetCorruption();
         CorruptionMix();
+    }
+
+    private void GetCorruption(){
+        //playerController.getForm();
+        if (playerController.getForm()){
+            corruption = 0.99f;
+        } else {
+            corruption = 0.01f;
+        }
+        //Debug.Log(playerController.isInDemonForm());
     }
 
     private void CorruptionMix() {
@@ -40,16 +56,16 @@ public class AudioManager : MonoBehaviour
         // mixer.SetFloat("LightVolume", (Mathf.Sin(Mathf.PI*(corruption+0.5f))-1)*20f);
     }
 
-    private void GetValue(float value){
-        corruption = value; //from 0 (pure) to 1 (corrupt)
+    // private void GetValue(float value){
+    //     corruption = value; //from 0 (pure) to 1 (corrupt)
 
-        if (corruption == 0){
-            corruption += 0.001f; //since taking log of corruption later
-        }
+    //     if (corruption == 0){
+    //         corruption += 0.001f; //since taking log of corruption later
+    //     }
 
-        if (corruption == 1){
-            corruption -= 0.01f;
-        }
-    }
+    //     if (corruption == 1){
+    //         corruption -= 0.01f;
+    //     }
+    // }
 
 }

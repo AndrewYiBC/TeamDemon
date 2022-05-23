@@ -150,6 +150,7 @@ public class PlayerControls : MonoBehaviour
     private void DemonFormTransform()
     {
         isDemonForm = !isDemonForm;
+        //Debug.Log(isDemonForm);
         demonFormAura.SetActive(isDemonForm);
     }
 
@@ -227,5 +228,10 @@ public class PlayerControls : MonoBehaviour
     {
         Gizmos.DrawWireSphere(attackCenterTransform_Normal.position, attackRadius_Normal);
         Gizmos.DrawWireSphere(attackCenterTransform_DemonForm.position, attackRadius_DemonForm);
+    }
+
+    public bool getForm()
+    {
+        return isDemonForm;
     }
 }
