@@ -343,6 +343,7 @@ GameObject:
   - component: {fileID: 2344430420156707311}
   - component: {fileID: 8571230075660045885}
   - component: {fileID: 1480553480}
+  - component: {fileID: 4853252525589502425}
   m_Layer: 7
   m_Name: PatrollingEnemy
   m_TagString: Enemy
@@ -427,7 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8296ac08de28b341b04a49c5719a504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
+  hp: 200
 --- !u!212 &2344430420156707311
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -514,3 +515,17 @@ MonoBehaviour:
   attackLayerMask:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &4853252525589502425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6751052913023181653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1c8c17e6b02a154f99aebcc292fb0b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xLimLeft: 0
+  xLimRight: 0

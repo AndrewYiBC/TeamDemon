@@ -103,10 +103,7 @@ public class PlayerControls : MonoBehaviour
     {
         // Movement
         rb.velocity = new Vector2(moveInputHorizontal * moveSpeed, rb.velocity.y);
-        if (isFacingLeft && moveInputHorizontal > 0)
-        {
-            Flip();
-        } else if (!isFacingLeft && moveInputHorizontal < 0)
+        if ((isFacingLeft && moveInputHorizontal > 0) || (!isFacingLeft && moveInputHorizontal < 0))
         {
             Flip();
         }
