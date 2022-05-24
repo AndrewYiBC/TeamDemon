@@ -7,6 +7,11 @@ public class PatrolingEnemy_Chase : StateMachineBehaviour
 
     Transform player;
     Rigidbody2D rb;
+
+    private bool isFacingLeft = true;
+    private float xLimLeft;
+    private float xLimRight;
+
     public float speed = 2.5f;
     public float attackRange = 3f;
     public float patrolRange = 10f;
@@ -17,6 +22,9 @@ public class PatrolingEnemy_Chase : StateMachineBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = animator.GetComponent<Rigidbody2D>();
+        PatrollingEnemyRangeLimit rangeLimitScript = animator.GetComponent<PatrollingEnemyRangeLimit>();
+        xLimLeft = rangeLimitScript.xLimLeft;
+        xLimRight = rangeLimitScript.xLimRight;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -24,7 +32,15 @@ public class PatrolingEnemy_Chase : StateMachineBehaviour
     {
         Vector2 target = new Vector2(player.position.x, rb.position.y);
         Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
-        rb.MovePosition(newPos);
+        if (newPos.x > xLimLeft && newPos.x < xLimRight)
+        {
+            rb.MovePosition(newPos);
+        }
+        if ((isFacingLeft && newPos.x < player.position.x) || (!isFacingLeft && newPos.x > player.position.x))
+        {
+            isFacingLeft = !isFacingLeft;
+            animator.transform.Rotate(0f, 180f, 0f);
+        }
 
         if (Vector2.Distance(player.position, rb.position) <= attackRange)
         {

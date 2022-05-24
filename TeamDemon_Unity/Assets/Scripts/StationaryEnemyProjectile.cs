@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillProjectile : MonoBehaviour
+public class StationaryEnemyProjectile : MonoBehaviour
 {
     private Rigidbody2D rb;
     [SerializeField] private float flySpeed;
-    [SerializeField] private float skillDamage;
+    [SerializeField] private float projectileDamage;
 
     void Start()
     {
@@ -16,12 +16,12 @@ public class SkillProjectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag != "Player")
+        if (collision.gameObject.tag != "Enemy")
         {
-            EnemyGeneral enemy = collision.GetComponent<EnemyGeneral>();
-            if (enemy != null)
+            PlayerControls player = collision.GetComponent<PlayerControls>();
+            if (player != null)
             {
-                enemy.DecreaseHP(skillDamage);
+                player.DecreaseHP(projectileDamage);
             }
             Destroy(gameObject);
         }

@@ -7,6 +7,8 @@ public class PatrollingEnemyAttack : MonoBehaviour
     public float attackRange = 2f;
     public LayerMask attackLayerMask;
 
+    [SerializeField] private Transform attackCenterPointTransform;
+    [SerializeField] private float attackDamage;
 
     // Start is called before the first frame update
     void Start()
@@ -22,12 +24,20 @@ public class PatrollingEnemyAttack : MonoBehaviour
 
     public void Attack()
     {
-        Vector3 pos = transform.position;
-
-        Collider2D colInfo = Physics2D.OverlapCircle(pos, attackRange, attackLayerMask);
+        Collider2D colInfo = Physics2D.OverlapCircle(attackCenterPointTransform.position, attackRange, attackLayerMask);
         if (colInfo != null)
         {
             //add stuff about player health deduction here
+            PlayerControls playerScript = colInfo.GetComponent<PlayerControls>();
+            if (playerScript != null)
+            {
+                playerScript.DecreaseHP(attackDamage);
+            }
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(attackCenterPointTransform.position, attackRange);
     }
 }

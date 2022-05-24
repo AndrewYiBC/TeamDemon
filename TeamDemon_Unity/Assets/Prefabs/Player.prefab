@@ -371,7 +371,7 @@ GameObject:
   - component: {fileID: 3081444935610374285}
   - component: {fileID: 3081444935610374287}
   - component: {fileID: 7741182574604934072}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -533,6 +533,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   jumpTimesMax: 2
+  hp: 100
   demonFormAura: {fileID: 14795028}
   attackDamage_Normal: 25
   attackDamage_DemonForm: 50
@@ -552,6 +553,7 @@ MonoBehaviour:
   skillCooldown: 0.5
   attackRecovery: 0.12
   skillRecovery: 0.12
+  respawnManager: {fileID: 0}
 --- !u!95 &7741182574604934072
 Animator:
   serializedVersion: 3
