@@ -248,7 +248,7 @@ public class PlayerControls : MonoBehaviour
     private IEnumerator ColorChangeCoroutine()
     {
         sr.color = new Color(1f, 0.4f, 0.4f, 1f);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         sr.color = new Color(1f, 1f, 1f, 1f);
     }
 
