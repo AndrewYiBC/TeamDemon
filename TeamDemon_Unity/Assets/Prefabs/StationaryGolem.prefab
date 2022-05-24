@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4156004925903296565}
   - component: {fileID: 4156004925903296564}
   m_Layer: 7
-  m_Name: StationaryEnemy 1
+  m_Name: StationaryGolem
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

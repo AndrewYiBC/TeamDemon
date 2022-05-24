@@ -934,7 +934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6751052913023181653, guid: c0780ca7a9828d042928f11f6846084b, type: 3}
       propertyPath: m_Name
-      value: PatrollingEnemy
+      value: PatrollingGolem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0780ca7a9828d042928f11f6846084b, type: 3}
@@ -5857,7 +5857,7 @@ PrefabInstance:
       objectReference: {fileID: 3081444936678596578}
     - target: {fileID: 4156004925903296574, guid: bda8cd8d173683d4eb42776316d6c7d6, type: 3}
       propertyPath: m_Name
-      value: StationaryEnemy
+      value: StationaryGolem
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bda8cd8d173683d4eb42776316d6c7d6, type: 3}

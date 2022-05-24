@@ -375,7 +375,7 @@ GameObject:
   - component: {fileID: 1480553480}
   - component: {fileID: 4853252525589502425}
   m_Layer: 7
-  m_Name: PatrollingEnemy
+  m_Name: PatrollingGolem
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
