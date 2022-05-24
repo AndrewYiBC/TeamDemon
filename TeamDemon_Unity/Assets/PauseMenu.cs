@@ -33,7 +33,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Settings()
     {
-        Debug.Log("this opens settings");
+        Debug.Log("Open Settings");
     }
     public void QuitGame()
     {
