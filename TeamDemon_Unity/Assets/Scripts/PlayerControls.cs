@@ -26,6 +26,9 @@ public class PlayerControls : MonoBehaviour
     private int jumpTimes = 0;
 
     // Combat
+    // HP
+    [SerializeField] private float hp = 100f;
+    SpriteRenderer sr;
     // Transformation
     private bool isDemonForm = false;
     [SerializeField] private GameObject demonFormAura;
@@ -47,20 +50,31 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private GameObject skillPrefab;
     [SerializeField] private float skillCooldown;
     private bool isInSkillCooldown = false;
-
     // Recovery
     [SerializeField] private float attackRecovery;
     [SerializeField] private float skillRecovery;
     private bool isInRecovery = false;
 
+    // Respawn
+    [SerializeField] private GameObject respawnManager;
+    private PlayerRespawn respawnScript;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
+        respawnScript = respawnManager.GetComponent<PlayerRespawn>();
     }
 
     void Update()
     {
+        // Respawn
+        if (hp <= 0)
+        {
+            Again();
+        }
+
         // Movement
         if (!isInRecovery)
         {
@@ -147,7 +161,6 @@ public class PlayerControls : MonoBehaviour
     private void DemonFormTransform()
     {
         isDemonForm = !isDemonForm;
-        //Debug.Log(isDemonForm);
         demonFormAura.SetActive(isDemonForm);
     }
 
@@ -218,6 +231,30 @@ public class PlayerControls : MonoBehaviour
         isInRecovery = true;
         yield return new WaitForSeconds(recoveryDuration);
         isInRecovery = false;
+    }
+
+    // Respawn
+    public void DecreaseHP(float amount)
+    {
+        hp -= amount;
+        DecreaseHPColorChange();
+    }
+
+    private void DecreaseHPColorChange()
+    {
+        StartCoroutine(ColorChangeCoroutine());
+    }
+
+    private IEnumerator ColorChangeCoroutine()
+    {
+        sr.color = new Color(1f, 0.4f, 0.4f, 1f);
+        yield return new WaitForSeconds(0.1f);
+        sr.color = new Color(1f, 1f, 1f, 1f);
+    }
+
+    private void Again()
+    {
+        respawnScript.Respawn();
     }
 
     // Miscellaneous
