@@ -32,6 +32,8 @@ public class PlayerControls : MonoBehaviour
     // Transformation
     private bool isDemonForm = false;
     [SerializeField] private GameObject demonFormAura;
+    [SerializeField] private float demonFormCooldown;
+    private bool isInDemonFormCooldown = false;
     // Melee Attack
     [SerializeField] private float attackDamage_Normal;
     [SerializeField] private float attackDamage_DemonForm;
@@ -97,7 +99,7 @@ public class PlayerControls : MonoBehaviour
 
         // Combat
         // Transformation
-        if (Input.GetKeyDown(KeyCode.T) && !isInRecovery)
+        if (Input.GetKeyDown(KeyCode.T) && !isInDemonFormCooldown && !isInRecovery)
         {
             DemonFormTransform();
         }
@@ -162,6 +164,14 @@ public class PlayerControls : MonoBehaviour
     {
         isDemonForm = !isDemonForm;
         demonFormAura.SetActive(isDemonForm);
+        StartCoroutine(DemonFormCooldownCoroutine());
+    }
+
+    private IEnumerator DemonFormCooldownCoroutine()
+    {
+        isInDemonFormCooldown = true;
+        yield return new WaitForSeconds(demonFormCooldown);
+        isInDemonFormCooldown = false;
     }
 
     // Melee Attack

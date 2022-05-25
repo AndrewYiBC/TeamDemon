@@ -535,6 +535,7 @@ MonoBehaviour:
   jumpTimesMax: 2
   hp: 100
   demonFormAura: {fileID: 14795028}
+  demonFormCooldown: 4
   attackDamage_Normal: 25
   attackDamage_DemonForm: 50
   attackCenterTransform_Normal: {fileID: 20045709}
