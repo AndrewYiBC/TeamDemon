@@ -14,8 +14,8 @@ public class PatrolingEnemy_Chase : StateMachineBehaviour
 
     public float speed = 2.5f;
     public float attackRange = 3f;
-    public float patrolRange = 10f;
-    float patrolTimeTracker = 0f;
+    //public float patrolRange = 10f;
+    //float patrolTimeTracker = 0f;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -54,19 +54,19 @@ public class PatrolingEnemy_Chase : StateMachineBehaviour
 
         //if out of range for too long
         //  go to patrol
-        if (Vector2.Distance(player.position, rb.position) >= patrolRange)
-        {
-            patrolTimeTracker += Time.fixedDeltaTime;
-        }
-        else
-        {
-            patrolTimeTracker = 0;
-        }
+        //if (Vector2.Distance(player.position, rb.position) >= patrolRange)
+        //{
+        //    patrolTimeTracker += Time.fixedDeltaTime;
+        //}
+        //else
+        //{
+        //    patrolTimeTracker = 0;
+        //}
 
-        if (patrolTimeTracker >= animator.GetFloat("PatrolTime"))
-        {
-            animator.SetTrigger("Patrol");
-        }
+        //if (patrolTimeTracker >= animator.GetFloat("PatrolTime"))
+        //{
+        //    animator.SetTrigger("Patrol");
+        //}
 
         //if (Vector2.Distance(player.position, rb.position) < animator.GetFloat("IdleDist"))
         //{
@@ -80,7 +80,7 @@ public class PatrolingEnemy_Chase : StateMachineBehaviour
     {
         animator.ResetTrigger("Attack");
         animator.ResetTrigger("Idle");
-        animator.ResetTrigger("Patrol");
+        //animator.ResetTrigger("Patrol");
         //animator.ResetTrigger("Chase");
     }
 
