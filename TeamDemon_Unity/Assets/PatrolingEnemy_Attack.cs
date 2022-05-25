@@ -8,11 +8,9 @@ public class PatrolingEnemy_Attack : StateMachineBehaviour
     Transform player;
     Rigidbody2D rb;
     public float speed = 2.5f;
-    public float attackRange = 7f;
-    public float patrolRange = 10f;
-    float patrolTimeTracker = 0f;
-    float attackCooldown = 2f;
-    bool isInAttackCooldown = false;
+    public float attackRange = 3f;
+    //public float patrolRange = 10f;
+    //float patrolTimeTracker = 0f;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -28,11 +26,9 @@ public class PatrolingEnemy_Attack : StateMachineBehaviour
         //Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
         //rb.MovePosition(newPos);
 
-        if (Vector2.Distance(player.position, rb.position) <= attackRange  &&  isInAttackCooldown == false)
+        if (Vector2.Distance(player.position, rb.position) <= attackRange)
         {
             animator.SetTrigger("Attack");
-            
-            //AttackCooldownCoroutine()
         }
 
         if (Vector2.Distance(player.position, rb.position) >= animator.GetFloat("IdleDist"))
@@ -42,19 +38,19 @@ public class PatrolingEnemy_Attack : StateMachineBehaviour
 
         //if out of range for too long
         //  go to patrol
-        if (Vector2.Distance(player.position, rb.position) >= patrolRange)
-        {
-            patrolTimeTracker += Time.fixedDeltaTime;
-        }
-        else
-        {
-            patrolTimeTracker = 0;
-        }
+        //if (Vector2.Distance(player.position, rb.position) >= patrolRange)
+        //{
+        //    patrolTimeTracker += Time.fixedDeltaTime;
+        //}
+        //else
+        //{
+        //    patrolTimeTracker = 0;
+        //}
 
-        if (patrolTimeTracker >= animator.GetFloat("PatrolTime"))
-        {
-            animator.SetTrigger("Patrol");
-        }
+        //if (patrolTimeTracker >= animator.GetFloat("PatrolTime"))
+        //{
+        //    animator.SetTrigger("Patrol");
+        //}
 
         if (Vector2.Distance(player.position, rb.position) < animator.GetFloat("IdleDist"))
         {
@@ -67,15 +63,8 @@ public class PatrolingEnemy_Attack : StateMachineBehaviour
     {
         //animator.ResetTrigger("Attack");
         animator.ResetTrigger("Idle");
-        animator.ResetTrigger("Patrol");
+        //animator.ResetTrigger("Patrol");
         animator.ResetTrigger("Chase");
-    }
-
-    IEnumerator AttackCooldownCoroutine() 
-    {
-        isInAttackCooldown = true;
-        yield return new WaitForSeconds(attackCooldown);
-        isInAttackCooldown = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
