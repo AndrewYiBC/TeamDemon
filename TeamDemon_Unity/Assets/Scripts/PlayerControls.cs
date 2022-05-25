@@ -34,6 +34,10 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private GameObject demonFormAura;
     [SerializeField] private float demonFormCooldown;
     private bool isInDemonFormCooldown = false;
+        //event system for broadcasting the transformation (for interfacing with the audio manager)
+        public delegate void TransformAction();
+        public static event TransformAction OnTransform;
+
     // Melee Attack
     [SerializeField] private float attackDamage_Normal;
     [SerializeField] private float attackDamage_DemonForm;
@@ -165,6 +169,11 @@ public class PlayerControls : MonoBehaviour
         isDemonForm = !isDemonForm;
         demonFormAura.SetActive(isDemonForm);
         StartCoroutine(DemonFormCooldownCoroutine());
+        
+        //calls the event onTransform
+        if (OnTransform != null){
+            OnTransform();
+        }
     }
 
     private IEnumerator DemonFormCooldownCoroutine()
@@ -274,8 +283,14 @@ public class PlayerControls : MonoBehaviour
         Gizmos.DrawWireSphere(attackCenterTransform_DemonForm.position, attackRadius_DemonForm);
     }
 
+    //the following two getter functions are used to interface with the audio manager
     public bool getForm()
     {
         return isDemonForm;
+    }
+
+    public float getCD()
+    {
+        return demonFormCooldown;
     }
 }

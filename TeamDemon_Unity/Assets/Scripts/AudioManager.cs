@@ -14,58 +14,63 @@ public class AudioManager : MonoBehaviour
 
     private PlayerControls playerController;
     private float corruption;
-
-    /*
-    TO DO:
-    - mix light and dark according to slider of corruption value
-    - master volume (slider and mute button)
-    */
+    private float CDDuration;
+    private bool isCorrupt;
 
     private void Awake() {
         corruption = 0.001f;
         //slider.onValueChanged.AddListener(GetValue);
 
         playerController = player.GetComponent<PlayerControls>();
+        CDDuration = playerController.getCD();
+        isCorrupt = playerController.getForm();
+    }
+
+    void OnEnable(){
+        PlayerControls.OnTransform += Transform;
+    }
+    
+    void OnDisable(){
+        PlayerControls.OnTransform -= Transform;
     }
 
     private void Start() {
         mixer.SetFloat("MasterVolume", 16f);
+        CorruptionMix(corruption);
     }
 
-    private void Update() {
-        GetCorruption();
-        CorruptionMix();
-    }
 
-    private void GetCorruption(){
-        //playerController.getForm();
-        if (playerController.getForm()){
+    //will be called everytime a transformation starts
+    void Transform(){
+        isCorrupt = playerController.getForm();
+
+        if (isCorrupt){
             corruption = 0.99f;
         } else {
             corruption = 0.01f;
         }
-        //Debug.Log(playerController.isInDemonForm());
+
+        StartCoroutine(GradientSound());
     }
 
-    private void CorruptionMix() {
+    //coroutine for gradiating the sound
+    IEnumerator GradientSound(){
+        
+        float timeInCD = 0f;
+        float currVol =  1-corruption;
 
-        mixer.SetFloat("DarkVolume", Mathf.Log10(corruption)*30f);
-        mixer.SetFloat("LightVolume", Mathf.Log10(1-corruption)*30f);
-
-        // mixer.SetFloat("DarkVolume", (Mathf.Sin(-1*Mathf.PI*(corruption+0.5f))-1)*20f);
-        // mixer.SetFloat("LightVolume", (Mathf.Sin(Mathf.PI*(corruption+0.5f))-1)*20f);
+        while (timeInCD < CDDuration){
+            timeInCD += Time.deltaTime;
+            float newVol = Mathf.Lerp(currVol, corruption, timeInCD / CDDuration);
+            CorruptionMix(newVol);
+            yield return null;
+        }
+        yield break;
     }
 
-    // private void GetValue(float value){
-    //     corruption = value; //from 0 (pure) to 1 (corrupt)
-
-    //     if (corruption == 0){
-    //         corruption += 0.001f; //since taking log of corruption later
-    //     }
-
-    //     if (corruption == 1){
-    //         corruption -= 0.01f;
-    //     }
-    // }
+    private void CorruptionMix(float targetVol) {
+        mixer.SetFloat("DarkVolume", Mathf.Log10(targetVol)*30f);
+        mixer.SetFloat("LightVolume", Mathf.Log10(1-targetVol)*30f);
+    }
 
 }
