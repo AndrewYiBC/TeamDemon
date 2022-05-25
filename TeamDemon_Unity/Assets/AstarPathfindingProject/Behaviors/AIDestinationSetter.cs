@@ -16,8 +16,8 @@ namespace Pathfinding {
 	public class AIDestinationSetter : VersionedMonoBehaviour {
 		/// <summary>The object that the AI should move to</summary>
 		public Transform target;
-		public Transform player;
 		public Transform spawnPoint;
+		public Transform player;
 		IAstarAI ai;
 		public float chaseRadius = 10f;
 
