@@ -123,6 +123,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   target: {fileID: 0}
+  player: {fileID: 0}
+  spawnPoint: {fileID: 0}
+  chaseRadius: 10
 --- !u!58 &4590210431644549760
 CircleCollider2D:
   m_ObjectHideFlags: 0

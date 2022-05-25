@@ -16,7 +16,10 @@ namespace Pathfinding {
 	public class AIDestinationSetter : VersionedMonoBehaviour {
 		/// <summary>The object that the AI should move to</summary>
 		public Transform target;
+		public Transform player;
+		public Transform spawnPoint;
 		IAstarAI ai;
+		public float chaseRadius = 10f;
 
 		void OnEnable () {
 			ai = GetComponent<IAstarAI>();
@@ -33,6 +36,15 @@ namespace Pathfinding {
 
 		/// <summary>Updates the AI's destination every frame</summary>
 		void Update () {
+			if (Vector2.Distance(player.transform.position, transform.position) < chaseRadius)
+			{
+				target = player;
+			}
+			else
+			{
+				target = spawnPoint;
+			}
+
 			if (target != null && ai != null) ai.destination = target.position;
 		}
 	}
