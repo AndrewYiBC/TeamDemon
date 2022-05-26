@@ -5,8 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerRespawn : MonoBehaviour
 {
-    [SerializeField] private GameObject respawnPoints;
-
+    private int respawnIndex = 1;
     void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -15,5 +14,15 @@ public class PlayerRespawn : MonoBehaviour
     public void Respawn()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public int getRespawnIndex()
+    {
+        return respawnIndex;
+    }
+
+    public void setRespawnIndex(int index)
+    {
+        respawnIndex = index;
     }
 }
