@@ -1027,6 +1027,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &110693901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 110693902}
+  - component: {fileID: 110693903}
+  m_Layer: 0
+  m_Name: RespawnIndexRecorder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &110693902
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110693901}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &110693903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110693901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab2c505373819bc4ba27c7274cabed95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &111092428
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3268,6 +3311,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1939316347}
     m_Modifications:
+    - target: {fileID: 4813010657879207821, guid: aae4f2eda60b14e41bec5885771d26e6, type: 3}
+      propertyPath: respawnPoints
+      value: 
+      objectReference: {fileID: 1939316346}
+    - target: {fileID: 4813010657879207821, guid: aae4f2eda60b14e41bec5885771d26e6, type: 3}
+      propertyPath: respawnManager
+      value: 
+      objectReference: {fileID: 1939316346}
     - target: {fileID: 5886723812879741509, guid: aae4f2eda60b14e41bec5885771d26e6, type: 3}
       propertyPath: m_Name
       value: RespawnFlag (1)
@@ -3590,7 +3641,7 @@ Transform:
   - {fileID: 581607036}
   - {fileID: 908948962}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &518904751
 PrefabInstance:
@@ -5442,7 +5493,7 @@ Transform:
   - {fileID: 192250111}
   - {fileID: 1818524652}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &732509728
 GameObject:
@@ -8181,7 +8232,7 @@ Transform:
   - {fileID: 1963536597}
   - {fileID: 1060934416}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1131667980
 GameObject:
@@ -9616,6 +9667,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1939316347}
     m_Modifications:
+    - target: {fileID: 4813010657879207821, guid: aae4f2eda60b14e41bec5885771d26e6, type: 3}
+      propertyPath: respawnPoints
+      value: 
+      objectReference: {fileID: 1939316346}
+    - target: {fileID: 4813010657879207821, guid: aae4f2eda60b14e41bec5885771d26e6, type: 3}
+      propertyPath: respawnManager
+      value: 
+      objectReference: {fileID: 1939316346}
     - target: {fileID: 5886723812879741509, guid: aae4f2eda60b14e41bec5885771d26e6, type: 3}
       propertyPath: m_Name
       value: RespawnFlag (2)
@@ -9709,7 +9768,7 @@ Transform:
   - {fileID: 2044709033}
   - {fileID: 1147220934}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1346489075
 PrefabInstance:
@@ -10908,7 +10967,7 @@ Transform:
   - {fileID: 1075959258}
   - {fileID: 1374373387}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1529696922
 PrefabInstance:
@@ -13590,7 +13649,7 @@ Transform:
   - {fileID: 1115261238}
   - {fileID: 1357442415}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1778265513
 GameObject:
@@ -13625,7 +13684,7 @@ Transform:
   - {fileID: 357288900}
   - {fileID: 164670315}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1780100314
 GameObject:
@@ -14074,7 +14133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 347615203137560966, guid: 91a9bb60651a48f44b2b288b33b390f3, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 347615203137560966, guid: 91a9bb60651a48f44b2b288b33b390f3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14878,7 +14937,7 @@ Transform:
   - {fileID: 483321165}
   - {fileID: 1314119593}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1939316348
 MonoBehaviour:
@@ -14892,6 +14951,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5008cf57d6ede1745b3e4793b35b494b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTransform: {fileID: 3081444936678596578}
+  respawnOffsetY: 3
 --- !u!1001 &1941371803
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16661,6 +16722,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3081444935610374287, guid: 5fe6f2c2e62e35941ad8446fea9867cf, type: 3}
+      propertyPath: respawnPoints
+      value: 
+      objectReference: {fileID: 1939316346}
+    - target: {fileID: 3081444935610374287, guid: 5fe6f2c2e62e35941ad8446fea9867cf, type: 3}
       propertyPath: respawnManager
       value: 
       objectReference: {fileID: 1939316346}
@@ -16862,6 +16927,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1939316347}
     m_Modifications:
+    - target: {fileID: 4813010657879207821, guid: aae4f2eda60b14e41bec5885771d26e6, type: 3}
+      propertyPath: respawnPoints
+      value: 
+      objectReference: {fileID: 1939316346}
+    - target: {fileID: 4813010657879207821, guid: aae4f2eda60b14e41bec5885771d26e6, type: 3}
+      propertyPath: respawnManager
+      value: 
+      objectReference: {fileID: 1939316346}
     - target: {fileID: 5886723812879741509, guid: aae4f2eda60b14e41bec5885771d26e6, type: 3}
       propertyPath: m_Name
       value: RespawnFlag

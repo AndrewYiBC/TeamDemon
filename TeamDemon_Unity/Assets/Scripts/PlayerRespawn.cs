@@ -5,24 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class PlayerRespawn : MonoBehaviour
 {
-    private int respawnIndex = 1;
+    [SerializeField] Transform playerTransform;
+    [SerializeField] float respawnOffsetY;
+
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
+        Vector3 respawnOffset = new Vector3(0f, respawnOffsetY, 0f);
+        playerTransform.position = transform.GetChild(RespawnIndexRecorder.RespawnIndex).position + respawnOffset;
     }
 
     public void Respawn()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public int getRespawnIndex()
-    {
-        return respawnIndex;
-    }
-
-    public void setRespawnIndex(int index)
-    {
-        respawnIndex = index;
     }
 }

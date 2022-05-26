@@ -23,7 +23,10 @@ public class StationaryEnemyProjectile : MonoBehaviour
             {
                 player.DecreaseHP(projectileDamage);
             }
-            Destroy(gameObject);
+            if (collision.gameObject.tag != "Interactable")
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
