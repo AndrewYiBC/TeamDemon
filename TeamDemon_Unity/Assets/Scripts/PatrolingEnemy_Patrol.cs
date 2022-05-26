@@ -23,8 +23,8 @@ public class PatrolingEnemy_Patrol : StateMachineBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = animator.GetComponent<Rigidbody2D>();
         PatrollingEnemyRangeLimit rangeLimitScript = animator.GetComponent<PatrollingEnemyRangeLimit>();
-        xLimLeft = rangeLimitScript.xLimLeft;
-        xLimRight = rangeLimitScript.xLimRight;
+        xLimLeft = rangeLimitScript.xLimLeftTransform.position.x;
+        xLimRight = rangeLimitScript.xLimRightTransform.position.x;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

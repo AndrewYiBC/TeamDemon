@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class PatrollingEnemyRangeLimit : MonoBehaviour
 {
-    public float xLimLeft;
-    public float xLimRight;
+    public Transform xLimLeftTransform;
+    public Transform xLimRightTransform;
 }
