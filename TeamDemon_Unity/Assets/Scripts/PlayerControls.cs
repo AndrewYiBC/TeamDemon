@@ -273,7 +273,7 @@ public class PlayerControls : MonoBehaviour
 
     private void Again()
     {
-        respawnScript.Respawn();
+        respawnScript.RespawnPlayer();
     }
 
     // Miscellaneous
