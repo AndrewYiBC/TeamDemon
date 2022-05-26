@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5886723812879741504}
   m_Layer: 0
   m_Name: RespawnFlag
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1918381099
   m_SortingLayer: -1
-  m_SortingOrder: 40
+  m_SortingOrder: 50
   m_Sprite: {fileID: 21300000, guid: 620a7e43454d4f04cbaec1cda896babe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
