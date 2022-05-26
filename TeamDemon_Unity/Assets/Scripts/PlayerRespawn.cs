@@ -14,7 +14,7 @@ public class PlayerRespawn : MonoBehaviour
         playerTransform.position = transform.GetChild(RespawnIndexRecorder.RespawnIndex).position + respawnOffset;
     }
 
-    public void Respawn()
+    public void RespawnPlayer()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
