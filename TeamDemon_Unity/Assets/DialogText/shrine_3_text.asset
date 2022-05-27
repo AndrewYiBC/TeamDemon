@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016fae3b843627f46b63ebf61e512b33, type: 3}
+  m_Name: shrine_3_text
+  m_EditorClassIdentifier: 
+  dialogue:
+  - 'SHRINE THREE: THE TREE
+
+    
+
+    Ashes to ashes; dust to dust
+
+    In a Wasteland
+    a sprout such as this is thrust
+
+    Beacon of hope, roots of steel
+
+    Standing
+    pretty and tall, you hold up your end of the deal
+
+    For eternities you shall
+    grow
+
+    A lighthouse to guide us out of this storm
+
+    Dedicated to our
+    ancestors, our descendants and our power
+
+    The dream of this tree will not
+    sour'
