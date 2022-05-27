@@ -6,6 +6,7 @@ public class Gargoyle : MonoBehaviour
 {
     private bool isFacingLeft = false;
     [SerializeField] private GameObject player;
+    [SerializeField] private Transform attackCenterTransform;
     [SerializeField] private float attackRadius;
     [SerializeField] private float attackDamage;
     [SerializeField] private float attackCooldown;
@@ -19,7 +20,7 @@ public class Gargoyle : MonoBehaviour
             transform.Rotate(0f, 180f, 0f);
         }
 
-        if (!isInAttackCooldown && Vector2.Distance(player.transform.position, transform.position) < attackRadius)
+        if (!isInAttackCooldown && Vector2.Distance(player.transform.position, attackCenterTransform.position) < attackRadius)
         {
             attack();
         }
@@ -40,5 +41,10 @@ public class Gargoyle : MonoBehaviour
         isInAttackCooldown = true;
         yield return new WaitForSeconds(attackCooldown);
         isInAttackCooldown = false;
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(attackCenterTransform.position, attackRadius);
     }
 }
