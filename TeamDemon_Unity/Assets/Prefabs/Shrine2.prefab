@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1425383568226852272}
   - component: {fileID: 1425383568226852274}
   - component: {fileID: 1425383568226852275}
+  - component: {fileID: 1179562101}
   m_Layer: 0
   m_Name: Shrine2
   m_TagString: Interactable
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1425383568226852278}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 109.67, y: 85.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 1918381099
   m_SortingLayer: -1
   m_SortingOrder: 20
-  m_Sprite: {fileID: 21300000, guid: bf522a1419c7dd64aae931c00b4d5c40, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 65a86aebb9e402143badc043fed5bcea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -113,3 +114,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueObject: {fileID: 11400000, guid: d5d7bbdbe10947446a9c9f8527da1d23, type: 2}
+--- !u!95 &1179562101
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425383568226852278}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ba08484f705d3044f939cc2632e2599f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
