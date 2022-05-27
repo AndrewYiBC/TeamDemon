@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RespawnIndexRecorder : MonoBehaviour
 {
-    public static int RespawnIndex = 4;
+    public static int RespawnIndex = 0;
 
     void Start()
     {
