@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016fae3b843627f46b63ebf61e512b33, type: 3}
+  m_Name: shrine_1_text
+  m_EditorClassIdentifier: 
+  dialogue:
+  - 'SHRINE ONE: THE MEMORIAL
+
+
+    Return to the Earth
+
+    Those who were once
+    outcasts of their own flesh
+
+    Deprived of rest, forced to wander painfully
+    in their prisons
+
+    Sink back, now, into the soil
+
+    Eternal exile overcome
+
+    To
+    become one with what will prevail
+
+    Once humanity reaches its end
+
+    The
+    world, once denied, is yours
+
+    In the grave'

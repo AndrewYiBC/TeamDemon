@@ -35,9 +35,9 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private GameObject demonFormAura;
     [SerializeField] private float demonFormCooldown;
     private bool isInDemonFormCooldown = false;
-        //event system for broadcasting the transformation (for interfacing with the audio manager)
-        public delegate void TransformAction();
-        public static event TransformAction OnTransform;
+    //event system for broadcasting the transformation (for interfacing with the audio manager)
+    public delegate void TransformAction();
+    public static event TransformAction OnTransform;
 
     // Melee Attack
     [SerializeField] private float attackDamage_Normal;
@@ -66,6 +66,10 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private GameObject respawnManager;
     private PlayerRespawn respawnScript;
 
+    // Interact 
+    [SerializeField] private Dialogue_UI dialogue_UI;
+    public Dialogue_UI Dialogue_UI => dialogue_UI;
+    public IInteractable Interactable { get; set; }
     void Start()
     {
         hp = hpMax;
@@ -77,6 +81,8 @@ public class PlayerControls : MonoBehaviour
 
     void Update()
     {
+        if (dialogue_UI.isOpen)
+            return;
         // Respawn
         if (hp <= 0)
         {
@@ -88,11 +94,12 @@ public class PlayerControls : MonoBehaviour
         {
             moveInputHorizontal = Input.GetAxisRaw("Horizontal");
             anim.SetFloat("Speed", Mathf.Abs(moveInputHorizontal));
-        } else
+        }
+        else
         {
             anim.SetFloat("Speed", Mathf.Abs(moveInputHorizontal));
         }
-        
+
         // Jump
         isGrounded = Physics2D.OverlapCircle(groundCheckTransform.position, groundCheckRadius, groundLayer);
         if (Input.GetButtonDown("Jump") && !isInRecovery)
@@ -118,6 +125,15 @@ public class PlayerControls : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1) && isDemonForm && !isInSkillCooldown && !isInRecovery)
         {
             UseSkill();
+        }
+        // Interact 
+        if (Input.GetKeyDown(KeyCode.E) && !isInRecovery)
+        {
+            if (Interactable != null)
+            {
+                Interactable.Interact(this);
+                moveInputHorizontal = 0;
+            }
         }
     }
 
@@ -171,9 +187,10 @@ public class PlayerControls : MonoBehaviour
         isDemonForm = !isDemonForm;
         demonFormAura.SetActive(isDemonForm);
         StartCoroutine(DemonFormCooldownCoroutine());
-        
+
         //calls the event onTransform
-        if (OnTransform != null){
+        if (OnTransform != null)
+        {
             OnTransform();
         }
     }
@@ -198,7 +215,8 @@ public class PlayerControls : MonoBehaviour
             attackDamage = attackDamage_DemonForm;
             attackEffectTemp_DemonForm.SetActive(true);
             StartCoroutine(AttackEffectCoroutine(attackEffectTemp_DemonForm));
-        } else
+        }
+        else
         {
             attackCenterTransform = attackCenterTransform_Normal;
             attackRadius = attackRadius_Normal;
@@ -207,7 +225,7 @@ public class PlayerControls : MonoBehaviour
             StartCoroutine(AttackEffectCoroutine(attackEffectTemp_Normal));
         }
         Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(attackCenterTransform.position, attackRadius, attackLayers);
-        foreach(Collider2D enemy in enemiesHit)
+        foreach (Collider2D enemy in enemiesHit)
         {
             EnemyGeneral enemy_script = enemy.GetComponent<EnemyGeneral>();
             if (enemy_script != null)
