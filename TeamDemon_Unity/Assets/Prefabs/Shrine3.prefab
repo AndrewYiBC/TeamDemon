@@ -113,3 +113,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueObject: {fileID: 11400000, guid: cb026ba93ccea5a4eb53ef99dbc76767, type: 2}
+  keyboardInstruction: {fileID: 0}
