@@ -23,7 +23,10 @@ public class SkillProjectile : MonoBehaviour
             {
                 enemy.DecreaseHP(skillDamage);
             }
-            Destroy(gameObject);
+            if (collision.gameObject.tag != "Interactable")
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
