@@ -15,7 +15,8 @@ public class DialogActivator : MonoBehaviour, IInteractable
     {
         if (collision.CompareTag("Player") && collision.TryGetComponent(out PlayerControls player))
         {
-            player.Interactable = null;
+            if (player.Interactable is DialogActivator dialogActivator && dialogActivator == this)
+                player.Interactable = null;
         }
     }
     public void Interact(PlayerControls player)
