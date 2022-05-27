@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6178255598138248483}
   - component: {fileID: 6178255598138248482}
   - component: {fileID: 6178255598138248485}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GraveyardPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
