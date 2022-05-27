@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 016fae3b843627f46b63ebf61e512b33, type: 3}
+  m_Name: shrine_2_text
+  m_EditorClassIdentifier: 
+  dialogue:
+  - 'SHRINE TWO: THE FOUNTAIN
+
+
+    The works of the divine
+
+    Lead those impure
+    to despair
+
+    Here stands such a work, in all of its perfection
+
+    Never
+    to degrade; never to spoil
+
+    Such are the truly blessed souls of the Earth
+
+    It
+    knows no decay
+
+    Immortal it stands
+
+    Untouched by the darkness
+
+    Imperfection
+    cowers and shrivels
+
+    In the unyielding, boundless light of its glow'
