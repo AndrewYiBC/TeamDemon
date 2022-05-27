@@ -27,7 +27,8 @@ public class PlayerControls : MonoBehaviour
 
     // Combat
     // HP
-    [SerializeField] private float hp = 100f;
+    [SerializeField] private float hpMax = 100f;
+    private float hp;
     SpriteRenderer sr;
     // Transformation
     private bool isDemonForm = false;
@@ -67,6 +68,7 @@ public class PlayerControls : MonoBehaviour
 
     void Start()
     {
+        hp = hpMax;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
@@ -253,6 +255,12 @@ public class PlayerControls : MonoBehaviour
     }
 
     // Respawn
+
+    public void RestoreHPFull()
+    {
+        hp = hpMax;
+    }
+
     public void DecreaseHP(float amount)
     {
         hp -= amount;

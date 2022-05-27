@@ -18,10 +18,10 @@ public class SkillProjectile : MonoBehaviour
     {
         if (collision.gameObject.tag != "Player")
         {
-            EnemyGeneral enemy = collision.GetComponent<EnemyGeneral>();
-            if (enemy != null)
+            EnemyGeneral enemyScript = collision.GetComponent<EnemyGeneral>();
+            if (enemyScript != null)
             {
-                enemy.DecreaseHP(skillDamage);
+                enemyScript.DecreaseHP(skillDamage);
             }
             if (collision.gameObject.tag != "Interactable")
             {
